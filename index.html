@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Tetris</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #ecf0f1;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+        }
+        
+        .game-wrapper {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        #game-container {
+            text-align: center;
+        }
+
+        #game-board {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 200px;
+        }
+
+        .panel-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        #score {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .controls {
+            text-align: left;
+        }
+
+        .controls h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .control-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .key {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .next-piece {
+            text-align: center;
+        }
+
+        .next-piece h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        #next-piece-canvas {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            margin: 0 auto;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-wrapper">
+        <div id="game-container">
+            <canvas id="game-board" width="300" height="600"></canvas>
+        </div>
+        
+        <div class="info-panel">
+            <div class="panel-box">
+                <div class="score-label">Score</div>
+                <div id="score"><span id="score-value">0</span></div>
+            </div>
+
+            <div class="panel-box next-piece">
+                <h3>Next Piece</h3>
+                <canvas id="next-piece-canvas" width="100" height="100"></canvas>
+            </div>
+
+            <div class="panel-box stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="lines">0</div>
+                    <div class="stat-label">Lines</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="level">1</div>
+                    <div class="stat-label">Level</div>
+                </div>
+            </div>
+
+            <div class="panel-box controls">
+                <h3>Controls</h3>
+                <div class="control-item">
+                    <span>Move Left</span>
+                    <span class="key">←</span>
+                </div>
+                <div class="control-item">
+                    <span>Move Right</span>
+                    <span class="key">→</span>
+                </div>
+                <div class="control-item">
+                    <span>Rotate</span>
+                    <span class="key">↑</span>
+                </div>
+                <div class="control-item">
+                    <span>Soft Drop</span>
+                    <span class="key">↓</span>
+                </div>
+                <div class="control-item">
+                    <span>Hard Drop</span>
+                    <span class="key">Space</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script defer src="game.js"></script>
+</body>
+</html> 
